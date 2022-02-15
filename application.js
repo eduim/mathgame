@@ -1,55 +1,54 @@
 
-//create random number
-var randomNumber = function(max){
-    number =  Math.round(Math.random() * (max-1));
-    return number
-  }; 
-  
-  
-  //get operators from checkforms
-  var check = function(){
-    var checks = $('.form-check-input');
-    operators = [];
-    checks.each(function(node) {
-      if($(this).prop('checked')){
-        operators.push($(this).val());
-      }
-    });
-    return operators;
-  }
-  
-  //select random operator from checklist
-  var randomOperator = function(operators){
-    return operators[randomNumber(operators.length)];
-  }
-  
-  
-  //create numbers for operation
-  var mathgame = function(operators,limit,ope){
-  
-    
-    //generate 2 random numbers
-    number1 = randomNumber(limit);
-    number2 = randomNumber(limit);
-    
-    //return result of string
-    function evil(fn) {
-      return new Function('return ' + fn)();
-    }
-    result = evil(number2+ope+number1)
-    
-    while (result < 0 || result < 1 || result%1 !=0) {
-      number1 = randomNumber(limit);
-      number2 = randomNumber(limit);
-      result = evil(number2+ope+number1)
-    }
-    return [number1, number2, result]
-  }
-  
-  
+
   //main function
   $(document).ready(function(){
-  
+    
+    //create random number
+    var randomNumber = function(max){
+        number =  Math.round(Math.random() * (max-1));
+        return number
+      }; 
+      
+      
+      //get operators from checkforms
+      var check = function(){
+        var checks = $('.form-check-input');
+        operators = [];
+        checks.each(function(node) {
+          if($(this).prop('checked')){
+            operators.push($(this).val());
+          }
+        });
+        return operators;
+      }
+      
+      //select random operator from checklist
+      var randomOperator = function(operators){
+        return operators[randomNumber(operators.length)];
+      }
+      
+      
+      //create numbers for operation
+      var mathgame = function(operators,limit,ope){
+      
+        
+        //generate 2 random numbers
+        number1 = randomNumber(limit);
+        number2 = randomNumber(limit);
+        
+        //return result of string
+        function evil(fn) {
+          return new Function('return ' + fn)();
+        }
+        result = evil(number2+ope+number1)
+        
+        while (result < 0 || result < 1 || result%1 !=0) {
+          number1 = randomNumber(limit);
+          number2 = randomNumber(limit);
+          result = evil(number2+ope+number1)
+        }
+        return [number1, number2, result]
+      }
     //Number limit
     $(document).on("change",'#customRange',function(){
       $('#rangeLimit').text(' '+this.value)

@@ -109,6 +109,8 @@
             timeLeft = 9;
             answers.push(count);
             console.log(answers);
+            count = 0;
+            $('#currentScore').val('');
             $('#highestScore').text(Math.max(...answers));
           }
         }, 1000);  

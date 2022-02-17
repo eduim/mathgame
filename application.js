@@ -31,7 +31,6 @@
       //create numbers for operation
       var mathgame = function(operators,limit,ope){
       
-        
         //generate 2 random numbers
         number1 = randomNumber(limit);
         number2 = randomNumber(limit);
@@ -40,12 +39,24 @@
         function evil(fn) {
           return new Function('return ' + fn)();
         }
-        result = evil(number2+ope+number1)
         
-        while (result < 0 || result < 1 || result%1 !=0) {
+        result = evil(number2+ope+number1)
+
+        if(ope == "/"){
+          multiply = number2 * number1
+          result = number2
+          number2 = multiply
+        }
+        
+        while (result < 0 || result < 1 || result%1 !=0 || number1 == number2) {
           number1 = randomNumber(limit);
           number2 = randomNumber(limit);
           result = evil(number2+ope+number1)
+          if(ope == "/"){
+            multiply = number2 * number1
+            result = number2
+            number2 = multiply
+          }
         }
         return [number1, number2, result]
       }
@@ -72,7 +83,7 @@
       ope = randomOperator(operators);
       numbers = mathgame(operators,max,ope)
       //extract numbers
-        n1 = numbers[0];
+      n1 = numbers[0];
       n2 = numbers[1];
       r = numbers[2];
       console.log(numbers)
